@@ -3,7 +3,7 @@ from typing import Callable
 
 
 def show_splash_screen(
-    start_main_widget: Callable,
+    launch_main_app: Callable,
     text: str = "Добро пожаловать",
     name: str = "пользователь"
 ) -> None:
@@ -20,7 +20,7 @@ def show_splash_screen(
 
     # После окончания заставки будет запущен основной цикл
     try:
-        splash.after(2500, lambda: start_main_widget(splash))
+        splash.after(2500, lambda: launch_main_app(splash))
         splash.mainloop()
     except Exception as e:
         print(f"Ошибка запуска главного окна: {e}")

@@ -12,7 +12,7 @@ class MainApp:
 
         # Установка иконки приложения
         self.set_icon()
-        
+
         # Отрисовка интерфейса
         self.render_ui()
 
@@ -30,8 +30,10 @@ class MainApp:
         # Скоро здесь будут методы для отрисовки интерфейса
         pass
 
+
 def start_main_app(splash):
-    splash.destroy()
+    # Функция для запуска основного окна
+    splash.destroy()  # Закрыть окно заставки
     root = tk.Tk()
     app = MainApp(root)
     root.mainloop()
