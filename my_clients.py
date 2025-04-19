@@ -1,6 +1,8 @@
 import os
 from splash_screen import show_splash_screen
 import tkinter as tk
+from home_screen import render_home_screen_ui as rhs_ui
+from add_client_screen import render_add_client_screen_ui as racs_ui
 
 
 class MainApp:
@@ -9,14 +11,21 @@ class MainApp:
         self.root = root
         self.root.title("My clients")
         self.root.geometry("500x500+500+150")
-
-        # Установка иконки приложения
         self.set_icon()
 
-        # Отрисовка интерфейса
-        self.render_ui()
+        # Инициализация фреймов
+        self.home_frame = rhs_ui(
+            self.root,
+            add_client_func=self.add_client_screen
+        )
+        self.screen_frame = racs_ui(
+            self.root,
+            return_home_screen_func=self.show_home_screen
+        )
 
-    def set_icon(self):
+        self.show_home_screen()
+
+    def set_icon(self) -> None:
         # Метод для установки иконки виджета
         icon_path = os.path.join(
             os.path.dirname(__file__),
@@ -26,9 +35,13 @@ class MainApp:
         if os.path.exists(icon_path):
             self.root.iconbitmap(icon_path)
 
-    def render_ui(self):
-        # Скоро здесь будут методы для отрисовки интерфейса
-        pass
+    def show_home_screen(self) -> None:
+        self.screen_frame.pack_forget()
+        self.home_frame.pack(fill="both", expand=True)
+
+    def add_client_screen(self) -> None:
+        self.home_frame.pack_forget()
+        self.screen_frame.pack(fill="both", expand=True)
 
 
 def start_main_app(splash):
@@ -40,4 +53,4 @@ def start_main_app(splash):
 
 
 if __name__ == "__main__":
-    show_splash_screen(start_main_app, "Добро пожаловать", "Дарья")
+    show_splash_screen(start_main_app)
