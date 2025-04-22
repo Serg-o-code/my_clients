@@ -1,9 +1,13 @@
 import tkinter as tk
+from typing import Callable
 
 
-def render_add_client_screen_ui(container, return_home_screen_func) -> tk.Frame:
+def render_add_client_screen_ui(
+        container, 
+        return_home_screen_func: Callable[[], None]
+) -> tk.Frame:
+    # Метод для отрисовки интерфейса экрана добавления клиента
     screen_frame = tk.Frame(container)
-    screen_frame.pack(expand=True, fill="both")
 
     title_label = tk.Label(
         screen_frame,

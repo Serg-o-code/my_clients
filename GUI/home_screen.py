@@ -3,12 +3,12 @@ from typing import Callable
 
 
 def render_home_screen_ui(
-        container, 
-        add_client_func: Callable[[], None]
+        container,
+        add_client_func: Callable[[], None],
+        show_client_list: Callable[[], None]
 ) -> tk.Frame:
-    # Метод для отрисовки интерфейса
+    # Метод для отрисовки интерфейса домашнего экрана
     home_frame = tk.Frame(container)  # Создание заглавного фрейма
-    home_frame.pack(expand=True, fill="both")
 
     # Создание фрейма, который будет вставлен в main_frame
     client_controls_frame = tk.LabelFrame(
@@ -40,7 +40,8 @@ def render_home_screen_ui(
         padx=25,
         pady=25,
         borderwidth=15,
-        font=("Calibri", 12, "bold")
+        font=("Calibri", 12, "bold"),
+        command=show_client_list
     )
     user_list_button.grid(column=0, row=1, padx=15, pady=15)
 

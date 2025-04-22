@@ -1,8 +1,9 @@
 import os
-from splash_screen import show_splash_screen
+from GUI.splash_screen import show_splash_screen
 import tkinter as tk
-from home_screen import render_home_screen_ui as rhs_ui
-from add_client_screen import render_add_client_screen_ui as racs_ui
+from GUI.home_screen import render_home_screen_ui as rhs_ui
+from GUI.add_client_screen import render_add_client_screen_ui as racs_ui
+from GUI.client_list_screen import render_client_list_screen_ui as rcls_ui
 
 
 class MainApp:
@@ -16,9 +17,14 @@ class MainApp:
         # Инициализация фреймов
         self.home_frame = rhs_ui(
             self.root,
-            add_client_func=self.add_client_screen
+            add_client_func=self.show_add_client_screen,
+            show_client_list=self.show_client_list_screen
         )
-        self.screen_frame = racs_ui(
+        self.add_client_screen_frame = racs_ui(
+            self.root,
+            return_home_screen_func=self.show_home_screen
+        )
+        self.client_list_screen_frame = rcls_ui(
             self.root,
             return_home_screen_func=self.show_home_screen
         )
@@ -36,12 +42,17 @@ class MainApp:
             self.root.iconbitmap(icon_path)
 
     def show_home_screen(self) -> None:
-        self.screen_frame.pack_forget()
+        self.add_client_screen_frame.pack_forget()
+        self.client_list_screen_frame.pack_forget()
         self.home_frame.pack(fill="both", expand=True)
 
-    def add_client_screen(self) -> None:
+    def show_add_client_screen(self) -> None:
         self.home_frame.pack_forget()
-        self.screen_frame.pack(fill="both", expand=True)
+        self.add_client_screen_frame.pack(fill="both", expand=True)
+
+    def show_client_list_screen(self) -> None:
+        self.home_frame.pack_forget()
+        self.client_list_screen_frame.pack(fill="both", expand=True)
 
 
 def start_main_app(splash):
