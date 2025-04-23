@@ -4,7 +4,7 @@ from typing import Callable
 
 def render_client_list_screen_ui(
         container, 
-        return_home_screen_func: Callable[[], None]
+        return_home_screen: Callable[[], None]
 ) -> tk.Frame:
     # Метод для отрисовки интерфейса экрана списка клиентов
     client_list_screen_frame = tk.Frame(container)
@@ -24,7 +24,7 @@ def render_client_list_screen_ui(
         padx=25,
         pady=25,
         font=("Calibri", 16, "bold"),
-        command=return_home_screen_func
+        command=return_home_screen
     )
     back_button.pack(pady=30)
 

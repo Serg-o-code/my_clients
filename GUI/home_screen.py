@@ -4,13 +4,13 @@ from typing import Callable
 
 def render_home_screen_ui(
         container,
-        add_client_func: Callable[[], None],
-        show_client_list: Callable[[], None]
+        show_add_client_screen: Callable[[], None],
+        show_client_list_screen: Callable[[], None]
 ) -> tk.Frame:
     # Метод для отрисовки интерфейса домашнего экрана
     home_frame = tk.Frame(container)  # Создание заглавного фрейма
 
-    # Создание фрейма, который будет вставлен в main_frame
+    # Создание фрейма, который будет вставлен в home_frame
     client_controls_frame = tk.LabelFrame(
         home_frame,
         text="Управление клиентами",
@@ -29,7 +29,7 @@ def render_home_screen_ui(
         pady=25,
         borderwidth=15,
         font=("Calibri", 12, "bold"),
-        command=add_client_func
+        command=show_add_client_screen
     )
     adding_button.grid(column=0, row=0, padx=15, pady=15)
 
@@ -41,7 +41,7 @@ def render_home_screen_ui(
         pady=25,
         borderwidth=15,
         font=("Calibri", 12, "bold"),
-        command=show_client_list
+        command=show_client_list_screen
     )
     user_list_button.grid(column=0, row=1, padx=15, pady=15)
 
