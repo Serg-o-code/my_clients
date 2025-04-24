@@ -4,7 +4,7 @@ from typing import Callable
 
 def render_add_client_screen_ui(
         container,
-        add_client_form_screen: Callable[[], None], 
+        show_add_client_form_screen: Callable[[], None], 
         return_home_screen: Callable[[], None]
 ) -> tk.Frame:
     # Метод для отрисовки интерфейса экрана добавления клиента
@@ -26,7 +26,7 @@ def render_add_client_screen_ui(
         padx=25,
         pady=25,
         font=("Calibri", 16, "bold"),
-        command=add_client_form_screen
+        command=show_add_client_form_screen
     )
     adding_button.grid(column=0, row=0, padx=15, pady=15)
 

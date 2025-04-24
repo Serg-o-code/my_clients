@@ -23,7 +23,7 @@ class MainApp:
         )
         self.add_client_screen_frame = racs_ui(
             self.root,
-            add_client_form_screen=self.show_add_client_form_screen,
+            show_add_client_form_screen=self.show_add_client_form_screen,
             return_home_screen=self.show_home_screen
         )
 
@@ -42,6 +42,7 @@ class MainApp:
     def show_home_screen(self) -> None:
         self.add_client_screen_frame.pack_forget()
         self.client_list_screen_frame.pack_forget()
+        self.add_client_form_screen_frame.pack_forget()
         self.home_frame.pack(fill="both", expand=True)
 
     def show_add_client_screen(self) -> None:
@@ -52,7 +53,20 @@ class MainApp:
 
     def show_client_list_screen(self) -> None:
         self.home_frame.pack_forget()
+        self.add_client_screen_frame.pack_forget()
+        self.add_client_form_screen_frame.pack_forget()
+
+        # Если был старый фрейм — убираем
+        if hasattr(self, 'client_list_screen_frame'):
+            self.client_list_screen_frame.destroy()
+
+         # Пересоздаем с актуальными данными
+        self.client_list_screen_frame = rcls_ui(
+        self.root,
+        return_home_screen=self.show_home_screen
+        )
         self.client_list_screen_frame.pack(fill="both", expand=True)
+
     
     def show_add_client_form_screen(self) -> None:
         self.add_client_screen_frame.pack_forget()
