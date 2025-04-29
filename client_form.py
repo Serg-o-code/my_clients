@@ -1,4 +1,5 @@
 import tkinter as tk
+import styles
 
 
 class ClientForm:
@@ -9,12 +10,16 @@ class ClientForm:
         labels = ["Номер", "Имя", "Фамилия", "Номер телефона", "Описание"]
 
         for number, value in enumerate(labels):
-            tk.Label(container, text=value, padx=5, pady=5).grid(
+            styles.make_style_label(
+                container,
+                value,
+                styles.MAIN_BG_COLOR,
+                styles.WHITE_TEXT_COLOR).grid(
                 column=0, row=number, padx=5, pady=5)
-            
-            entry = tk.Entry(container, width=40)
+
+            entry = styles.make_style_entry(container)
             entry.grid(column=1, row=number)
-            
+
             self.entries[value] = entry
 
     def get_data(self):
